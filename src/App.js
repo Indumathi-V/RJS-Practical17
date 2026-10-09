@@ -22,20 +22,26 @@ const products = [
 ];
 
 function App() {
+  const initialState = [];
 
-  // TODO: Create the initial cart state
-
-  // TODO: Use useReducer with cartReducer
+  const [cart, dispatch] = useReducer(
+    cartReducer,
+    initialState
+  );
 
   return (
     <div className="container">
-
       <h1>Shopping Cart</h1>
 
-      {/* TODO: Pass products and dispatch to ProductList */}
+      <ProductList
+        products={products}
+        dispatch={dispatch}
+      />
 
-      {/* TODO: Pass cart and dispatch to Cart */}
-
+      <Cart
+        cart={cart}
+        dispatch={dispatch}
+      />
     </div>
   );
 }

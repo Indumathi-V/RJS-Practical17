@@ -1,34 +1,49 @@
-import React from "react";
+import React, { useReducer } from "react";
+import cartReducer from "./reducer";
+import ProductList from "./components/ProductList";
+import Cart from "./components/Cart";
 
-function ProductList({ products, dispatch }) {
+const products = [
+  {
+    id: 1,
+    name: "Laptop",
+    price: 50000
+  },
+  {
+    id: 2,
+    name: "Headphones",
+    price: 2000
+  },
+  {
+    id: 3,
+    name: "Keyboard",
+    price: 1500
+  }
+];
+
+function App() {
+  const initialState = [];
+
+  const [cart, dispatch] = useReducer(
+    cartReducer,
+    initialState
+  );
 
   return (
-    <section>
-      <h2>Products</h2>
+    <div className="container">
+      <h1>Shopping Cart</h1>
 
-      <div className="products">
+      <ProductList
+        products={products}
+        dispatch={dispatch}
+      />
 
-        {products.map((product) => (
-
-          <div className="product" key={product.id}>
-
-            <h3>{product.name}</h3>
-
-            <p>Price: ₹{product.price}</p>
-
-            <button
-              // TODO: Dispatch ADD action
-            >
-              Add to Cart
-            </button>
-
-          </div>
-
-        ))}
-
-      </div>
-    </section>
+      <Cart
+        cart={cart}
+        dispatch={dispatch}
+      />
+    </div>
   );
 }
 
-export default ProductList;
+export default App;
